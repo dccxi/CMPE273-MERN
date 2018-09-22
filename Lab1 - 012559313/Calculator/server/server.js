@@ -1,11 +1,13 @@
 const express = require('express')
 const bodyParser = require('body-parser')
+const logger = require('morgan')
 const app = express()
 
 app.set('port', process.env.PORT || 3001)
 
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
+app.use(logger('dev'))
 
 app.post('/api/calculate', (req, res) => {
   let results = eval(req.body.inputs.toString())
