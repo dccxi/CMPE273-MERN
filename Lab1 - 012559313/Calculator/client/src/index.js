@@ -50,7 +50,6 @@ class Calc extends Component {
       body: JSON.stringify({ inputs: inputs })
     }).then(res => res.json())
       .then(res => {
-        console.log(res)
         this.setState({ results: res.results })
       })
   }
