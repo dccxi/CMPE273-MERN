@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
 import Numpad from './Numpad'
 import Display from './Display'
+import './calculator.css'
 
 class Calc extends Component {
   constructor() {
@@ -55,7 +56,7 @@ class Calc extends Component {
   }
   render() {
     return (
-      <div>
+      <div className="calculator">
         <Display results={ this.state.results } inputs={ this.state.inputs } />
         <Numpad buttonHandler={ this.buttonHandler } />
       </div>

@@ -1,0 +1,40 @@
+html {
+  background-color: black;
+}
+
+p {
+  color: white;
+}
+
+button {
+  width: 55px;
+  height: 55px;
+  margin: 5px;
+  color: white;
+  border: none;
+  background: #2b1c1c;
+  border-radius:10px;
+  font-size: 25px
+}
+
+.results {
+  height: 30px;
+  font-size: 50px;
+  font-family: arial;
+  text-align: right;
+}
+
+.inputs {
+  height: 25px;
+  width: 250px;
+  font-size: 25px;
+  font-family: arial;
+  text-align: right;
+}
+
+.calculator {
+  text-align: right;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
