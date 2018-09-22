@@ -1,0 +1,11 @@
+{
+  "name": "Calculator",
+  "version": "1.0.0",
+  "main": "./server/server.js",
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "concurrently": "^4.0.1",
+    "express": "^4.16.3"
+  }
+}
