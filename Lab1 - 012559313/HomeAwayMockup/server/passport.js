@@ -5,7 +5,7 @@ import { findUser } from './db'
 
 passport.use(new JwtStrategy({
   jwtFromRequest: ExtractJwt.fromAuthHeaderWithScheme('jwt'),
-  secretOrKey: config.secret,
+  secretOrKey: config.secret
 }, (jwt_payload, done) => {
   let user = (({ username, password }) => ({ username, password }))(jwt_payload)
   findUser(user, () => done(false, false), (token) => {
