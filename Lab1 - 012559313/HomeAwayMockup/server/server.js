@@ -14,7 +14,7 @@ app.use(bodyParser.json())
 
 app.post('/register', (req, res) => {
   let user = req.body
-  if (!user.username || !user.password) res.json({ success: false })
+  if (!user.email || !user.password) res.json({ success: false })
   else createUser(
     user,
     () => res.json({ success: false }),
@@ -24,7 +24,7 @@ app.post('/register', (req, res) => {
 
 app.post('/login', (req, res) => {
   let user = req.body
-  if (!user.username || !user.password) res.json({ success: false })
+  if (!user.email || !user.password) res.json({ success: false })
   else findUser(
     user,
     () => res.json({ success: false }),
@@ -35,7 +35,7 @@ app.post('/login', (req, res) => {
 app.get('/',
   requireAuth,
   (req, res) => {
-    res.send(`username: ${req.user.username}`)
+    res.send(`email: ${req.user.email}`)
   })
 
 app.listen(app.get('port'), () => console.log(`Listening on port ${app.get('port')}`))

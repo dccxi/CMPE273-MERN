@@ -21,7 +21,7 @@ export function createUser(user, fail, succ) {
         if (err) console.error(err)
         else {
           let passwordHash = hash
-          let queryString = `INSERT INTO users (USERNAME, PASSWORDHASH) VALUES (${mysql.escape(user.username)}, ${mysql.escape(passwordHash)});`
+          let queryString = `INSERT INTO users (EMAIL, PASSWORDHASH, FIRSTNAME, LASTNAME) VALUES (${mysql.escape(user.email)}, ${mysql.escape(passwordHash)}, ${mysql.escape(user.firstname)}, ${mysql.escape(user.lastname)});`
           con.query(queryString, (err, row, fields) => {
             if (err) {
               console.error(err)
@@ -41,7 +41,7 @@ export function findUser(user, fail, succ) {
   pool.getConnection((err, con) => {
     if (err) console.error(err)
     else {
-      let queryString = `SELECT * FROM users WHERE username = ${mysql.escape(user.username)};`
+      let queryString = `SELECT * FROM users WHERE email = ${mysql.escape(user.email)};`
       con.query(queryString, (err, row, fields) => {
         if (err) {
           console.error(err)

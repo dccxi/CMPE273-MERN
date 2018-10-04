@@ -7,7 +7,7 @@ passport.use(new JwtStrategy({
   jwtFromRequest: ExtractJwt.fromAuthHeaderWithScheme('jwt'),
   secretOrKey: config.secret
 }, (jwt_payload, done) => {
-  let user = (({ username, password }) => ({ username, password }))(jwt_payload)
+  let user = (({ email, password }) => ({ email, password }))(jwt_payload)
   findUser(user, () => done(false, false), (token) => {
     delete user.password
     done(null, user)
