@@ -1,7 +1,7 @@
 import { LOGIN, LOGOUT, REGISTER } from '../actions/types'
 
 const initialState = {
-  registerdSuccess: false,
+  registeredSuccess: false,
   loggedInSuccess: false
 }
 

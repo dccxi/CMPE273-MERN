@@ -48,14 +48,14 @@ export const register = user => dispatch => {
       dispatch({
         type: REGISTER,
         payload: {
-          registerdSuccess: true
+          registeredSuccess: true
         }
       })
     } else {
       dispatch({
         type: REGISTER,
         payload: {
-          registerdSuccess: false
+          registeredSuccess: false
         }
       })
     }

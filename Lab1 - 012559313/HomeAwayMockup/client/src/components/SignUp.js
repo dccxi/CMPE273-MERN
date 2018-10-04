@@ -8,8 +8,8 @@ class SignUp extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      firstname: '',
-      lastname: '',
+      firstName: '',
+      lastName: '',
       email: '',
       password: ''
     }
@@ -20,7 +20,7 @@ class SignUp extends React.Component {
     })
   }
   validateForm() {
-    return this.state.firstname.length && this.state.lastname.length && this.state.email.length && this.state.password.length
+    return this.state.firstName.length && this.state.lastName.length && this.state.email.length && this.state.password.length
   }
   onSubmit = e => {
     e.preventDefault()
@@ -33,12 +33,12 @@ class SignUp extends React.Component {
     )
   }
   render() {
-    if (this.props.registerdSuccess)
+    if (this.props.registeredSuccess)
       return (
         <Welcome />
       )
     else {
-      const required_input = [['firstname', 'text', 'First Name', '0'], ['lastname', 'text', 'Last Name', '1'], ['email', 'email', 'Email', '2'], ['password', 'password', 'Password', '3']]
+      const required_input = [['firstName', 'text', 'First Name', '0'], ['lastName', 'text', 'Last Name', '1'], ['email', 'email', 'Email', '2'], ['password', 'password', 'Password', '3']]
       // const optional_input = [['phone', 'tel', 'Phone Number', '4'], ['city', 'text', 'City', '5'], ['about', 'text', 'About Me', '6']]
       return (
         <div className='signup'>
@@ -62,7 +62,7 @@ class SignUp extends React.Component {
 }
 
 const mapStateToProps = (state) => (
-  { registerdSuccess: state.auth.registerdSuccess }
+  { registeredSuccess: state.auth.registeredSuccess }
 )
 
 
