@@ -39,7 +39,7 @@ class DetailView extends React.Component {
       },
       data: _.omit(this.state, ['imageView'])
     }).then(res => {
-      console.log(res.data);
+      console.log(res.data)
     })
   }
   handleChangeStart = date => {

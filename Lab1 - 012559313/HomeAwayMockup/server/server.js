@@ -26,23 +26,19 @@ const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     const { propertyId } = req.body
     if (propertyId) {
-      console.log(111);
       const propertyDir = `server/uploads/${propertyId}`
       if (!fs.existsSync(propertyDir))
         fs.mkdir(propertyDir, err => { console.log(err) })
       cb(null, propertyDir)
     } else {
-      console.log(222);
       cb(null, 'server/uploads')
     }
   },
   filename: function (req, file, cb) {
     const { propertyId } = req.body
     if (propertyId) {
-      console.log(333);
       cb(null, propertyId)
     } else {
-      console.log(444);
       cb(null, uuid.fromString(req.user.email))
     }
 
@@ -159,11 +155,6 @@ app.post('/withoutPooling', (req, res) => {
     (err) => res.json({ success: false, error: err }),
     (token) => res.json({ success: true, token: `JWT ${token}` })
   )
-})
-
-app.get('/checkLoggedInTest', requireAuth, (req, res) => {
-  console.log('test');
-  res.end('test')
 })
 
 app.listen(app.get('port'), () => console.log(`Listening on port ${app.get('port')}`))

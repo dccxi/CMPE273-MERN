@@ -52,7 +52,6 @@ class ListProperty extends React.Component {
   )
   onSubmit = e => {
     e.preventDefault()
-    console.log(this.state);
     postProperty(this.state)
   }
   render() {

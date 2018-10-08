@@ -97,16 +97,15 @@ export const updateProfile = userProfile => dispatch => {
     },
     data: userProfile
   }).then(res => {
-    console.log(res.data);
     if (res.data.success) {
       dispatch({
         type: UPDATE_PROFILE,
         payload: userProfile
       })
-      console.log('updated');
+      console.log('updated')
       history.push('/')
     } else {
-      console.log('not success');
+      console.log('not success')
     }
   }).catch(err => console.log(err))
 }
@@ -126,9 +125,6 @@ export const postProperty = property => {
     data
   }).then(res => {
     if (res.data.success) {
-      console.log(images.photos);
-      console.log(typeof images.photos);
-      console.log(images.photos.length);
       for (const image of images.photos) {
         let formData = new FormData()
         formData.append('propertyId', propertyId)
@@ -142,13 +138,13 @@ export const postProperty = property => {
           data: formData
         }).then(res => {
           if (res.data.success) {
-            console.log('Property Posted');
+            console.log('Property Posted')
           } else
-            console.log('not success');
+            console.log('not success')
         }).catch(err => console.log(err))
       }
     } else {
-      console.log('not success');
+      console.log('not success')
     }
   }).catch(err => console.log(err))
 }
@@ -165,7 +161,6 @@ export const search = input => dispatch => {
   }).then(res => {
     if (res.data.noMatch)
       console.log('no match')
-    console.log(res.data);
     dispatch({
       type: FETCHED_SEARCH,
       payload: res.data
