@@ -196,6 +196,7 @@ export function findProperty(input) {
               res(rows)
           } else {
             console.log('no found');
+            rej()
           }
         })
         con.release()
