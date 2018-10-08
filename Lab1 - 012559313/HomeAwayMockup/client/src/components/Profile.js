@@ -63,7 +63,7 @@ class Profile extends React.Component {
             placeholder='About me'
             name='about'
             onChange={ this.handleChange }
-            value={ Buffer.from(this.state.about).toString('utf8') }
+            value={ Buffer.from(this.state.about || '').toString('utf8') }
           />
         </div>
         <div>
