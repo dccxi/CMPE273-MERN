@@ -19,6 +19,7 @@ export default function authReducers(state = initialState, action) {
         ...state,
         ...action.payload
       }
-    default: return state
+    default:
+      return state
   }
 }
