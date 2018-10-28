@@ -77,14 +77,14 @@ export const getProfile = () => dispatch => {
     method: 'get',
     url: '/profile',
     headers: {
-      Authorization: token,
+      Authorization: token
     }
   }).then(res => {
     dispatch({
       type: FETCH_PROFILE,
       payload: res.data
     })
-  })
+  }).catch((err) => console.log(err))
 }
 
 export const updateProfile = userProfile => dispatch => {
@@ -139,6 +139,7 @@ export const postProperty = property => {
         }).then(res => {
           if (res.data.success) {
             console.log('Property Posted')
+            history.push('/')
           } else
             console.log('not success')
         }).catch(err => console.log(err))
@@ -163,7 +164,7 @@ export const search = input => dispatch => {
       console.log('no match')
     dispatch({
       type: FETCHED_SEARCH,
-      payload: res.data
+      payload: res.data.map(u => _.omit(u, ['_id', '__v']))
     })
     history.push('/results')
   }).catch(err => console.log(err))

@@ -40,6 +40,7 @@ class DetailView extends React.Component {
       data: _.omit(this.state, ['imageView'])
     }).then(res => {
       console.log(res.data)
+      this.props.history.push('/')
     })
   }
   handleChangeStart = date => {

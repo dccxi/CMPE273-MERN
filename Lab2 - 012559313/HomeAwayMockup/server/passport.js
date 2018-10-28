@@ -8,10 +8,11 @@ passport.use(new JwtStrategy({
   secretOrKey: config.secret
 }, (jwt_payload, done) => {
   let user = (({ email, password }) => ({ email, password }))(jwt_payload)
-  findUser(user, () => done(false, false), (token) => {
-    delete user.password
-    done(null, user)
-  })
+  findUser(user)
+    .then((token) => {
+      delete user.password
+      done(null, user)
+    }).catch((err) => done(false, false))
 }))
 
 export let requireAuth = passport.authenticate('jwt', { session: false })

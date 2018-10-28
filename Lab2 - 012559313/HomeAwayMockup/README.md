@@ -2,9 +2,13 @@
 ## Steps to Run
 
 0. Make sure port 3000 and 3001 are not occupied.
-1. `yarn` (or `npm i`) in both `HomeAwayMockup` and `HomeAwayMockup/client` folder to download node_modulus needed.
+1. Copy MongoDB URI obtained from mLab into environment variables following this format:
 ```shell
-> cd server; yarn; cd ..; yarn
+> export DB_URI=mongodb://<dbuser>:<dbpassword>@dsxxxxxx.mlab.com:xxxxx/homeaway_mockup
 ```
-2. In `HomeAwayMockup` folder, run `yarn start` (or `npm start`)
-3. Direct to `localhost:3000` in browser.
+2. `yarn` (or `npm i`) in both `HomeAwayMockup` and `HomeAwayMockup/client` folder to download node_modulus needed.
+```shell
+> cd client; yarn; cd ..; yarn
+```
+3. In `HomeAwayMockup` folder, run `yarn start` (or `npm start`)
+4. Direct to `localhost:3000` in browser.

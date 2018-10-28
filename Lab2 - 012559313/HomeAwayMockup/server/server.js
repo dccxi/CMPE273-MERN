@@ -56,21 +56,18 @@ app.use(bodyParser.json())
 app.post('/register', (req, res) => {
   let user = req.body
   if (!user.email || !user.password) res.json({ success: false })
-  else createUser(
-    user,
-    (err) => res.json({ success: false, error: err }),
-    () => res.json({ success: true })
-  )
+  else createUser(user)
+    .then(() => res.json({ success: true }))
+    .catch((err) => res.json({ success: false, error: err }))
+
 })
 
 app.post('/login', (req, res) => {
   let user = req.body
   if (!user.email || !user.password) res.json({ success: false })
-  else findUser(
-    user,
-    (err) => res.json({ success: false, error: err }),
-    (token) => res.json({ success: true, token: `JWT ${token}` })
-  )
+  else findUser(user)
+    .then((token) => res.json({ success: true, token: `JWT ${token}` }))
+    .catch((err) => res.json({ success: false, error: err }))
 })
 
 app.get('/profile', requireAuth, (req, res) => {
@@ -80,7 +77,7 @@ app.get('/profile', requireAuth, (req, res) => {
 })
 
 app.post('/updateProfile', requireAuth, (req, res) => {
-  const email = req.user.email
+  const { email } = req.user
   const userProfile = req.body
   updateProfile(email, userProfile)
     .then(ret => res.json(ret))
