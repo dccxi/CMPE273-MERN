@@ -14,7 +14,7 @@ import uuid from 'uuidv4'
 export const login = user => dispatch => {
   axios({
     method: 'post',
-    url: '/login',
+    url: '/user/login',
     data: user
   }).then(res => {
     const { success, token } = res.data
@@ -50,7 +50,7 @@ export const logout = () => {
 export const register = user => dispatch => {
   axios({
     method: 'post',
-    url: '/register',
+    url: '/user/register',
     data: user,
   }).then(res => {
     if (res.data.success) {
@@ -75,7 +75,7 @@ export const getProfile = () => dispatch => {
   const token = localStorage.getItem('token')
   axios({
     method: 'get',
-    url: '/profile',
+    url: '/user/profile',
     headers: {
       Authorization: token
     }
@@ -90,8 +90,8 @@ export const getProfile = () => dispatch => {
 export const updateProfile = userProfile => dispatch => {
   const token = localStorage.getItem('token')
   axios({
-    method: 'post',
-    url: '/updateProfile',
+    method: 'put',
+    url: '/user/update',
     headers: {
       Authorization: token,
     },
@@ -118,7 +118,7 @@ export const postProperty = property => {
   const images = _.pick(property, ['photos'])
   axios({
     method: 'post',
-    url: '/postProperty',
+    url: '/property',
     headers: {
       Authorization: token,
     },
@@ -131,7 +131,7 @@ export const postProperty = property => {
         formData.append('photo', image)
         axios({
           method: 'post',
-          url: '/postImage',
+          url: '/image',
           headers: {
             Authorization: token,
           },
@@ -154,7 +154,7 @@ export const search = input => dispatch => {
   const token = localStorage.getItem('token')
   axios({
     method: 'post',
-    url: '/search',
+    url: '/property/search',
     headers: {
       Authorization: token,
     },

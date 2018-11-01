@@ -20,7 +20,7 @@ class DetailView extends React.Component {
     const token = localStorage.getItem('token')
     axios({
       method: 'get',
-      url: '/getPhoto/' + this.props.match.params.id,
+      url: '/image/' + this.props.match.params.id,
       headers: {
         Authorization: token,
       }
