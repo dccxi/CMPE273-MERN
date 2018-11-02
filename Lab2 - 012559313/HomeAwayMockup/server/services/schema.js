@@ -1,7 +1,8 @@
-import config from './config'
+import config from '../config'
 import mongoose from 'mongoose'
 
 mongoose.Promise = global.Promise
+console.log(config.dbUri);
 mongoose.connect(config.dbUri, {
   useNewUrlParser: true,
   useCreateIndex: true,

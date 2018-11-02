@@ -1,6 +1,6 @@
 import passport from 'passport'
 import { Strategy as JwtStrategy, ExtractJwt } from 'passport-jwt'
-import config from './config'
+import config from '../config'
 import { findUser } from './db'
 
 passport.use(new JwtStrategy({

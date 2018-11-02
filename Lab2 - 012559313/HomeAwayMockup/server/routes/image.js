@@ -1,5 +1,5 @@
 import { Router } from 'express'
-import { requireAuth } from './../passport'
+import { requireAuth } from './../services/passport'
 import multer from 'multer'
 import uuid from 'uuidv4'
 import fs from 'fs'
@@ -11,12 +11,12 @@ const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     const { propertyId } = req.body
     if (propertyId) {
-      const propertyDir = `server/uploads/${propertyId}`
+      const propertyDir = `uploads/${propertyId}`
       if (!fs.existsSync(propertyDir))
         fs.mkdir(propertyDir, err => { console.log(err) })
       cb(null, propertyDir)
     } else {
-      cb(null, 'server/uploads')
+      cb(null, 'uploads')
     }
   },
   filename: function (req, file, cb) {

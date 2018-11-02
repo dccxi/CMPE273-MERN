@@ -1,6 +1,6 @@
 import { Router } from 'express'
-import { requireAuth } from './../passport'
-import { createUser, findUser, getProfile, updateProfile } from './../db'
+import { requireAuth } from '../services/passport'
+import { createUser, findUser, getProfile, updateProfile } from '../services/db'
 
 let router = Router()
 

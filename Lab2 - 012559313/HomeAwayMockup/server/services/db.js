@@ -1,7 +1,6 @@
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
-import mysql from 'mysql'
-import config from './config'
+import config from '../config'
 import _ from 'lodash'
 import moment from 'moment'
 import { Users, Properties, Trips } from './schema'

@@ -1,6 +1,6 @@
 import { Router } from 'express'
-import { requireAuth } from './../passport'
-import { createProperty, findProperty } from './../db'
+import { requireAuth } from '../services/passport'
+import { createProperty, findProperty } from '../services/db'
 
 let router = Router()
 
