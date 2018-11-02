@@ -22,7 +22,7 @@ const storage = multer.diskStorage({
   filename: function (req, file, cb) {
     const { propertyId } = req.body
     if (propertyId) {
-      cb(null, propertyId)
+      cb(null, uuid())
     } else {
       cb(null, uuid.fromString(req.user.email))
     }
@@ -36,11 +36,17 @@ router.post('/', requireAuth, upload.single('photo'), (req, res) => {
 })
 router.get('/:id', requireAuth, (req, res) => {
   const id = req.params.id
-  const fileLocation = path.join(__dirname + './../uploads', id, id)
-  const img = fs.readFileSync(fileLocation)
-  const base64img = new Buffer(img).toString('base64')
-  res.writeHead(200, { 'Content-Type': 'image/jpg' })
-  res.end(base64img)
+  const dirLocation = path.join(__dirname + './../uploads', id)
+  const files = fs.readdirSync(dirLocation)
+  let ret = []
+  files.forEach(file => {
+    let img = fs.readFileSync(path.join(dirLocation, file))
+    let base64img = new Buffer(img).toString('base64')
+    ret.push(base64img)
+  })
+  res.json(ret)
+  // res.writeHead(200, { 'Content-Type': 'text/plain' })
+  // res.end(ret)
 })
 
 export default router

@@ -25,7 +25,10 @@ class DetailView extends React.Component {
         Authorization: token,
       }
     }).then(res => {
-      let imageView = 'data:image/jpg;base64, ' + res.data
+      let imageView = []
+      res.data.forEach(img => {
+        imageView.push('data:image/jpg;base64, ' + img)
+      })
       this.setState({ imageView })
     })
   }
@@ -60,9 +63,13 @@ class DetailView extends React.Component {
       if (property.propertyId === this.props.match.params.id)
         p = property
     })
+    let imageView = Array.from(this.state.imageView)
+    const renderImages = imageView.map(
+      (img, i) => <img src={ img } style={ { width: '300px' } } alt='property' key={ i } />
+    )
     return (
       <div>
-        <img src={ this.state.imageView } style={ { width: '300px' } } alt='property' />
+        { renderImages }
         <h3>Name</h3>
         <p>{ p.headline }</p>
         <h3>Type</h3>
