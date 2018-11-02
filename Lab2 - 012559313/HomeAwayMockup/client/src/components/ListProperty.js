@@ -52,7 +52,12 @@ class ListProperty extends React.Component {
   )
   onSubmit = e => {
     e.preventDefault()
-    postProperty(this.state)
+    console.log(this.state)
+    if (this.state.photos.length < 2 || this.state.photos.length > 5) {
+      alert('Please upload minimum of 2 and maximum of 5 photos')
+    } else {
+      postProperty(this.state)
+    }
   }
   render() {
     return (

@@ -125,6 +125,7 @@ export const postProperty = property => {
     data
   }).then(res => {
     if (res.data.success) {
+      console.log('Property Posted')
       for (const image of images.photos) {
         let formData = new FormData()
         formData.append('propertyId', propertyId)
@@ -138,7 +139,7 @@ export const postProperty = property => {
           data: formData
         }).then(res => {
           if (res.data.success) {
-            console.log('Property Posted')
+            console.log('Image Saved')
             history.push('/')
           } else
             console.log('not success')
