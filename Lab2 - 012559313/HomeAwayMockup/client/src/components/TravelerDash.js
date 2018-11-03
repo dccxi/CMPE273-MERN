@@ -12,7 +12,7 @@ export default class TravelerDash extends React.Component {
     const token = localStorage.getItem('token')
     axios({
       method: 'get',
-      url: '/getTrips',
+      url: '/trip',
       headers: {
         Authorization: token,
       }

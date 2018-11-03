@@ -9,10 +9,12 @@ import moment from 'moment'
 class DetailView extends React.Component {
   constructor(props) {
     super(props)
+    this.startDate = this.props.date.startDate
+    this.endDate = this.props.date.endDate
     this.state = {
       houseId: this.props.match.params.id,
-      startDate: moment(),
-      endDate: moment().clone().add(1, 'days'),
+      startDate: moment(this.startDate),
+      endDate: moment(this.endDate),
       imageView: ''
     }
   }
@@ -25,10 +27,7 @@ class DetailView extends React.Component {
         Authorization: token,
       }
     }).then(res => {
-      let imageView = []
-      res.data.forEach(img => {
-        imageView.push('data:image/jpg;base64, ' + img)
-      })
+      let imageView = res.data.split(',')
       this.setState({ imageView })
     })
   }
@@ -36,20 +35,23 @@ class DetailView extends React.Component {
     const token = localStorage.getItem('token')
     axios({
       method: 'post',
-      url: '/postTrip',
+      url: '/trip',
       headers: {
         Authorization: token,
       },
       data: _.omit(this.state, ['imageView'])
     }).then(res => {
       console.log(res.data)
-      this.props.history.push('/')
+      if (res.data.true) {
+        alert('Trip booked!')
+        this.props.history.push('/')
+      }
     })
   }
   handleChangeStart = date => {
     this.setState({
       startDate: date,
-      endDate: date.clone().add(1, 'days')
+      // endDate: date.clone().add(1, 'days')
     })
   }
   handleChangeEnd = date => {
@@ -88,6 +90,8 @@ class DetailView extends React.Component {
           <DatePicker
             selected={ this.state.startDate }
             selectsStart
+            minDate={ this.startDate }
+            maxDate={ this.endDate }
             startDate={ this.state.startDate }
             endDate={ this.state.endDate }
             onChange={ this.handleChangeStart }
@@ -98,10 +102,11 @@ class DetailView extends React.Component {
           <DatePicker
             selected={ this.state.endDate }
             selectsEnd
+            minDate={ this.startDate }
+            maxDate={ this.endDate }
             startDate={ this.state.startDate }
             endDate={ this.state.endDate }
             onChange={ this.handleChangeEnd }
-            minDate={ this.state.endDate }
             showDisabledMonthNavigation
           />
         </div>
@@ -115,7 +120,10 @@ class DetailView extends React.Component {
 }
 
 const mapStateToProps = (state) => (
-  { results: state.property }
+  {
+    results: state.property,
+    date: state.date
+  }
 )
 
 export default connect(mapStateToProps, null)(DetailView)

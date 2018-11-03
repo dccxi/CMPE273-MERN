@@ -10,20 +10,20 @@ router.post('/', requireAuth, (req, res) => {
   createTrip(traveler, trip)
     .then(ret => res.json(ret))
     .catch(err => console.error(err))
-})
+})//
 
 router.get('/', requireAuth, (req, res) => {
   const traveler = req.user.email
   getTrips(traveler)
     .then(ret => res.json(ret))
     .catch(err => console.error(err))
-})
+})//
 
 router.get('/booking', requireAuth, (req, res) => {
   const owner = req.user.email
   getBookings(owner)
     .then(ret => res.json(ret))
     .catch(err => console.error(err))
-})
+})//
 
 export default router

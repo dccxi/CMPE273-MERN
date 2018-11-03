@@ -151,7 +151,6 @@ class ListProperty extends React.Component {
               id='instant'
               value='1'
               onChange={ this.handleChange }
-              required
             />
             <label htmlFor='instant'>Instant Booking (Recommended)</label>
           </div>

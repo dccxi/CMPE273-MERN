@@ -4,7 +4,8 @@ import {
   REGISTER,
   FETCH_PROFILE,
   UPDATE_PROFILE,
-  FETCHED_SEARCH
+  FETCHED_SEARCH,
+  SET_DATE_RANGE
 } from './types'
 import axios from 'axios'
 import { history } from '../services/_history'
@@ -116,38 +117,39 @@ export const postProperty = property => {
   _.assign(property, { propertyId })
   const data = _.omit(property, ['photos'])
   const images = _.pick(property, ['photos'])
-  axios({
-    method: 'post',
-    url: '/property',
-    headers: {
-      Authorization: token,
-    },
-    data
-  }).then(res => {
-    if (res.data.success) {
-      console.log('Property Posted')
-      for (const image of images.photos) {
-        let formData = new FormData()
-        formData.append('propertyId', propertyId)
-        formData.append('photo', image)
-        axios({
-          method: 'post',
-          url: '/image',
-          headers: {
-            Authorization: token,
-          },
-          data: formData
-        }).then(res => {
-          if (res.data.success) {
-            console.log('Image Saved')
-            history.push('/')
-          } else
-            console.log('not success')
-        }).catch(err => console.log(err))
+  const imgur = 'Client-ID 0abc0da2b5eecc3'
+  let photos = []
+  Promise.all(images.photos.map(async (image) => {
+    let formData = new FormData()
+    formData.append('image', image)
+    await axios.post('https://api.imgur.com/3/upload',
+      formData, { headers: { Authorization: imgur } })
+      .then(res => {
+        console.log(res);
+        if (res.data.success) {
+          console.log(res.data);
+          photos.push(res.data.data.link)
+        }
+      })
+  })).then(() => {
+    console.log(photos);
+    _.assign(data, { photos })
+    console.log(data);
+    axios({
+      method: 'post',
+      url: '/property',
+      headers: {
+        Authorization: token,
+      },
+      data
+    }).then(res => {
+      if (res.data.success) {
+        console.log('Property Posted')
+        history.push('/')
+      } else {
+        console.log('not success')
       }
-    } else {
-      console.log('not success')
-    }
+    }).catch(err => console.log(err))
   }).catch(err => console.log(err))
 }
 
@@ -163,6 +165,10 @@ export const search = input => dispatch => {
   }).then(res => {
     if (res.data.noMatch)
       console.log('no match')
+    dispatch({
+      type: SET_DATE_RANGE,
+      payload: _.pick(input, ['startDate', 'endDate'])
+    })
     dispatch({
       type: FETCHED_SEARCH,
       payload: res.data.map(u => _.omit(u, ['_id', '__v']))

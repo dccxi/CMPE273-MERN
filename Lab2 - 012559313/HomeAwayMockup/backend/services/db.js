@@ -104,6 +104,23 @@ export function findProperty(input) {
   })
 }
 
+export function findPropertyImage(id) {
+  return new Promise((res, rej) => {
+    Properties.find({ propertyId: id })
+      .then(us => {
+        console.log(45645);
+        console.log(us);
+        if (us.length)
+          res(us[0].photos)
+        else
+          rej()
+      }).catch((err) => {
+        console.log(err)
+        rej()
+      })
+  })
+}
+
 export function createTrip(traveler, trip) {
   return new Promise((res, rej) => {
     const newTrip = new Trips(Object.assign(trip, { traveler }))

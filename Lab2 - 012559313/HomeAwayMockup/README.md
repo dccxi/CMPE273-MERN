@@ -8,7 +8,7 @@
 ```
 2. `yarn` (or `npm i`) in both `HomeAwayMockup` and `HomeAwayMockup/client` folder to download node_modulus needed.
 ```shell
-> cd client; yarn; cd ../server; yarn
+> cd client; yarn; cd ../backend; yarn
 ```
-3. In `server` folder, run `yarn start` (or `npm start`)
+3. In `backend` folder, run `yarn start` (or `npm start`)
 4. Direct to `localhost:3000` in browser.

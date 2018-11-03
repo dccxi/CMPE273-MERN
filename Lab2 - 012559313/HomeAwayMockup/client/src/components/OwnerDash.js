@@ -12,7 +12,7 @@ export default class OwnerDash extends React.Component {
     const token = localStorage.getItem('token')
     axios({
       method: 'get',
-      url: '/getBookings',
+      url: '/trip/booking',
       headers: {
         Authorization: token,
       }

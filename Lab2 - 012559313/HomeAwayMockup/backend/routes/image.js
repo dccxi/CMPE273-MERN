@@ -1,5 +1,5 @@
 import { Router } from 'express'
-import { requireAuth } from './../services/passport'
+import { requireAuth } from '../services/auth'
 import multer from 'multer'
 import uuid from 'uuidv4'
 import fs from 'fs'
@@ -33,7 +33,7 @@ const upload = multer({ storage })
 
 router.post('/', requireAuth, upload.single('photo'), (req, res) => {
   res.json({ success: true })
-})
+})//
 router.get('/:id', requireAuth, (req, res) => {
   const id = req.params.id
   const dirLocation = path.join(__dirname + './../uploads', id)
@@ -47,6 +47,6 @@ router.get('/:id', requireAuth, (req, res) => {
   res.json(ret)
   // res.writeHead(200, { 'Content-Type': 'text/plain' })
   // res.end(ret)
-})
+})//
 
 export default router

@@ -76,6 +76,10 @@ export const Users = mongoose.model('Users', {
 })
 
 export const Properties = mongoose.model('Properties', {
+  photos: {
+    type: String,
+    required: true
+  },
   propertyId: {
     type: String,
     required: true,
