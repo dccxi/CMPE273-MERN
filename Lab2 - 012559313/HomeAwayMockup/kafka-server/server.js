@@ -1,7 +1,7 @@
 import express from 'express'
 import logger from 'morgan'
 import bodyParser from 'body-parser'
-import { user, property, trip, image } from './routes/index'
+import { user, property, trip, image, message } from './routes/index'
 
 const app = express()
 
@@ -15,5 +15,6 @@ app.use('/user', user)
 app.use('/property', property)
 app.use('/image', image)
 app.use('/trip', trip)
+app.use('/message', message)
 
 app.listen(app.get('port'), () => console.log(`Listening on port ${app.get('port')}`))

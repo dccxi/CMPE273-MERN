@@ -28,6 +28,7 @@ class Login extends React.Component {
   render() {
     return (
       <div className='login'>
+        <Link to='/'><button>Home</button></Link>
         <h2>Log in to HomeAway (mockup)</h2>
         <p>
           Need an account?

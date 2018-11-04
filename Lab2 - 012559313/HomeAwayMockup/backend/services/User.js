@@ -41,7 +41,7 @@ export function profile(token) {
     isAuthenticated(user)
       .then(() => {
         console.log('authorized')
-        getProfile(user.email)
+        getProfile(email)
           .then(ret => res(ret))
           .catch(err => console.error(err))
       }).catch(() => {

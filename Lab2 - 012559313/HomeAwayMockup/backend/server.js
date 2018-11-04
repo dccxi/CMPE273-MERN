@@ -2,6 +2,7 @@ import * as User from './services/User'
 import * as Property from './services/Property'
 import * as Trip from './services/Trip'
 import * as Image from './services/Image'
+import * as Message from './services/Message'
 import kafka from 'kafka-node'
 
 const topic_list = {
@@ -14,7 +15,10 @@ const topic_list = {
   'trip_post': Trip.post,
   'trip_get': Trip.get,
   'trip_booking': Trip.booking,
-  'image_get': Image.get
+  'image_get': Image.get,
+  'msg_post': Message.post,
+  'msg_get': Message.get,
+  'msg_reply': Message.reply
 }
 
 const KAFKA_ADDRESS = "localhost:2181"
@@ -54,9 +58,20 @@ let consumer = new kafka.Consumer(client, [
   }, {
     topic: 'image_get',
     partition: 0
+  }, {
+    topic: 'msg_post',
+    partition: 0
+  }, {
+    topic: 'msg_get',
+    partition: 0
+  }, {
+    topic: 'msg_reply',
+    partition: 0
   }
 ], { groupId: 'group1' })
-consumer.on('ready', () => console.log('ready'))
+
+// consumer.on('ready', () => console.log('ready'))
+console.log('kafka server ready')
 consumer.on('message', message => {
   let handleRequest = topic_list[message.topic]
   console.log('message received for', message.topic);

@@ -12,6 +12,7 @@ import SearchResults from './components/SearchResults'
 import DetailView from './components/DetailView'
 import TravelerDash from './components/TravelerDash'
 import OwnerDash from './components/OwnerDash'
+import Inbox from './components/Inbox'
 
 import './App.css'
 import { history } from './services/_history'
@@ -31,6 +32,7 @@ class App extends React.Component {
           <PrivateRoute path='/detail/:id' component={ DetailView } />
           <PrivateRoute path='/dashboard' component={ TravelerDash } />
           <PrivateRoute path='/ownerdash' component={ OwnerDash } />
+          <PrivateRoute path='/inbox' component={ Inbox } />
         </div>
       </Router>
     );

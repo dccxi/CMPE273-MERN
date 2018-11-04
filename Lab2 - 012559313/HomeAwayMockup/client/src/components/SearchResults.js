@@ -28,11 +28,11 @@ class SearchResults extends React.Component {
   }
   handlePrevPage = () => {
     if (this.state.page > 0)
-      this.setState({ page: --this.state.page })
+      this.setState({ page: this.state.page - 1 })
   }
   handleNextPage = () => {
     if (this.state.page < this.pages.length - 1) {
-      this.setState({ page: ++this.state.page })
+      this.setState({ page: this.state.page + 1 })
     }
   }
   render() {

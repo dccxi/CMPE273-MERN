@@ -7,6 +7,7 @@ export default class OwnerDash extends React.Component {
     this.state = {
       bookings: []
     }
+    this.counter = 0
   }
   componentWillMount() {
     const token = localStorage.getItem('token')
@@ -21,7 +22,7 @@ export default class OwnerDash extends React.Component {
       if (res.data.length)
         res.data.forEach(booking => {
           bookings.push(
-            <div key={ booking.houseId }>
+            <div key={ this.counter++ }>
               <h3>Id of the house booked:</h3>
               <p>{ booking.houseId }</p>
               <h3>Start at:</h3>

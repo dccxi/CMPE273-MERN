@@ -61,6 +61,7 @@ class Home extends React.Component {
         <nav>
           <Link to='/profile'><button>Profile</button></Link>
           <Link to='/dashboard'><button>Traveler Dashboard</button></Link>
+          <Link to='/inbox'><button>Inbox</button></Link>
           { this.ownerOnly() }
         </nav>
         <hr />

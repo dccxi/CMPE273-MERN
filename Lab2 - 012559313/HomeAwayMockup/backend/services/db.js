@@ -3,7 +3,7 @@ import jwt from 'jsonwebtoken'
 import config from '../config'
 import _ from 'lodash'
 import moment from 'moment'
-import { Users, Properties, Trips } from './schema'
+import { Users, Properties, Trips, Messages } from './schema'
 
 export function createUser(user) {
   return new Promise((res, rej) => {
@@ -108,8 +108,7 @@ export function findPropertyImage(id) {
   return new Promise((res, rej) => {
     Properties.find({ propertyId: id })
       .then(us => {
-        console.log(45645);
-        console.log(us);
+        console.log('property found');
         if (us.length)
           res(us[0].photos)
         else
@@ -150,13 +149,66 @@ export function getBookings(owner) {
     Properties.find({ owner })
       .then(properties => {
         let ret = []
-        let promises = properties.map(propertyId => {
-          Trips.find({ propertyId })
+        let propertyIds = properties.map(a => a.propertyId)
+        Promise.all(propertyIds.map(async (houseId) => {
+          await Trips.find({ houseId })
             .then(trips => {
-              ret.concat(trips)
-            })
+              ret = ret.concat(trips)
+            }).catch(err => console.error(err))
+        })).then(() => {
+          console.log(ret);
+          res(ret)
         })
-        Promise.all(promises).then(() => { res(ret) })
+      }).catch(err => console.error(err))
+  })
+}
+
+export function postMessage(sender, msg) {
+  return new Promise((res, rej) => {
+    const newMessage = new Messages(Object.assign(msg, { sender }))
+    newMessage.save().then(() => {
+      console.log('message posted')
+      res({ success: true })
+    }).catch(err => {
+      console.error(err.errmsg)
+      rej(err.errmsg)
+    })
+  })
+}
+
+export function getMessage(email) {
+  return new Promise((res, rej) => {
+    Messages.findOne({ receiver: email })
+      .then(u => {
+        if (u === null) {
+          Messages.findOne({ sender: email })
+            .then(u => {
+              console.log(564736245);
+              res(u)
+            }).catch(err => {
+              console.error(err.errmsg)
+              rej(err.errmsg)
+            })
+        } else
+          res(u)
+      }).catch(err => {
+        console.error(err.errmsg)
+        rej(err.errmsg)
+      })
+  })
+}
+
+
+export function replyMessage(msg) {
+  let { sender, receiver } = msg
+  return new Promise((res, rej) => {
+    Messages.findOneAndUpdate({ sender, receiver }, msg)
+      .then(() => {
+        console.log('message updated')
+        res({ success: true })
+      }).catch(err => {
+        console.error(err.errmsg)
+        rej(err.errmsg)
       })
   })
 }

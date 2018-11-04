@@ -157,3 +157,18 @@ export const Trips = mongoose.model('Trips', {
     required: true
   }
 })
+
+export const Messages = mongoose.model('Messages', {
+  sender: {
+    type: String,
+    required: true
+  },
+  receiver: {
+    type: String,
+    required: true
+  },
+  message: {
+    type: Object,
+    required: true
+  }
+})
