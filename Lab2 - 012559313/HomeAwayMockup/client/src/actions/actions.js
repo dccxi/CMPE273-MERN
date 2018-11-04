@@ -36,7 +36,8 @@ export const login = user => dispatch => {
           loggedInSuccess: false
         }
       })
-      console.log('login fail');
+      alert('Wrong email or password')
+      console.log('Wrong email or password');
     }
   }).catch(console.err)
 }
@@ -103,6 +104,7 @@ export const updateProfile = userProfile => dispatch => {
         type: UPDATE_PROFILE,
         payload: userProfile
       })
+      alert('Profile updated')
       console.log('updated')
       history.push('/')
     } else {
@@ -144,6 +146,7 @@ export const postProperty = property => {
       data
     }).then(res => {
       if (res.data.success) {
+        alert('Property posted')
         console.log('Property Posted')
         history.push('/')
       } else {

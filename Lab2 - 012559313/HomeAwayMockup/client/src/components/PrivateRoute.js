@@ -6,12 +6,13 @@ export default function ({ component: COMPONENT, ...rest }) {
     <Route { ...rest } render={
       props => localStorage.getItem('token') ?
         <COMPONENT { ...Object.assign(props, rest) } />
-        : <Redirect
-          to={ {
-            pathname: "/login",
-            state: { from: props.location }
-          } }
-        />
+        : (<div>{ alert('Please login to proceed') }
+          <Redirect
+            to={ {
+              pathname: "/login",
+              state: { from: props.location }
+            } }
+          /></div>)
     } />
   )
 }
