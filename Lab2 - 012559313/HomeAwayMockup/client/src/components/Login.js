@@ -23,12 +23,15 @@ class Login extends React.Component {
   onSubmit = e => {
     e.preventDefault()
     let user = (({ email, password }) => ({ email, password }))(this.state)
-    this.props.onLogIn(user)
+    let re = /\S+@\S+\.\S+/
+    if (re.test(user.email))
+      this.props.onLogIn(user)
+    else
+      alert('Please use a valid email address')
   }
   render() {
     return (
       <div className='login'>
-        <Link to='/'><button>Home</button></Link>
         <h2>Log in to HomeAway (mockup)</h2>
         <p>
           Need an account?

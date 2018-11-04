@@ -27,7 +27,11 @@ class SignUp extends React.Component {
   onSubmit = e => {
     e.preventDefault()
     let user = this.state
-    this.props.onRegister(user)
+    let re = /\S+@\S+\.\S+/
+    if (re.test(user.email))
+      this.props.onRegister(user)
+    else
+      alert('Please use a valid email address')
   }
   build_input = attr => {
     return (
