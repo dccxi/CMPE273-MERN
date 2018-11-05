@@ -56,11 +56,10 @@ class Inbox extends React.Component {
   }
   render() {
     let conversation = []
-    let isReceiver = this.props.myEmail === this.state.receiver
     for (let i in this.state.message) {
       conversation.push(
         <div key={ this.counter++ }>
-          <h3>{ ((i % 2 === 0 && isReceiver) || (i % 2 === 1 && !isReceiver)) ? this.state.sender : this.state.receiver }: </h3>
+          <h3>{ i % 2 === 0 ? this.state.sender : this.state.receiver }: </h3>
           <p>{ this.state.message[i] }</p>
         </div>
       )
