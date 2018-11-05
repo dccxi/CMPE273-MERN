@@ -21,7 +21,7 @@
     "uuidv4": "^2.0.0"
   },
   "scripts": {
-    "start": "concurrently \"nodemon ./server.js --exec babel-node --presets es2015,stage-3\" \"cd ./../client && npm start\""
+    "start": "nodemon ./server.js --exec babel-node --presets es2015,stage-3"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
