@@ -71,7 +71,7 @@ let consumer = new kafka.Consumer(client, [
 ], { groupId: 'group1' })
 
 // consumer.on('ready', () => console.log('ready'))
-console.log('kafka server ready')
+console.log('server ready')
 consumer.on('message', message => {
   let handleRequest = topic_list[message.topic]
   console.log('message received for', message.topic);
