@@ -1,12 +1,11 @@
 import React from 'react'
-import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { login, logout } from '../actions/'
+import { login } from '../actions/'
 
 class Login extends React.Component {
   constructor(props) {
     super(props)
-    this.props.onLogOut()
+    localStorage.removeItem('token')
     this.state = {
       email: "",
       password: ""
@@ -23,7 +22,7 @@ class Login extends React.Component {
   onSubmit = e => {
     e.preventDefault()
     let user = (({ email, password }) => ({ email, password }))(this.state)
-    this.props.onLogIn(user)
+    login(user)
   }
   render() {
     return (
@@ -53,17 +52,4 @@ class Login extends React.Component {
   }
 }
 
-const mapDispatchToProps = dispatch => ({
-  onLogIn(user) {
-    dispatch(
-      login(user)
-    )
-  },
-  onLogOut() {
-    dispatch(
-      logout()
-    )
-  }
-})
-
-export default connect(null, mapDispatchToProps)(Login)
+export default Login

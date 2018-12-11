@@ -7,7 +7,11 @@
     "bcrypt": "^3.0.1",
     "body-parser": "^1.18.3",
     "concurrently": "^4.0.1",
+    "cors": "^2.8.5",
     "express": "^4.16.3",
+    "express-graphql": "^0.7.1",
+    "graphql": "^14.0.2",
+    "graphql-tools": "^4.0.3",
     "jsonwebtoken": "^8.3.0",
     "lodash": "^4.17.11",
     "moment": "^2.22.2",
@@ -21,7 +25,7 @@
     "uuidv4": "^2.0.0"
   },
   "scripts": {
-    "start": "concurrently \"nodemon ./server/server.js --exec babel-node --presets es2015,stage-3\" \"cd client && npm start\""
+    "start": "concurrently \"nodemon ./server.js --exec babel-node --presets es2015,stage-3\" \"cd ../client && npm start\""
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",

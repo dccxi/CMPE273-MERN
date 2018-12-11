@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "react-apollo": "^2.3.2"
+  }
+}

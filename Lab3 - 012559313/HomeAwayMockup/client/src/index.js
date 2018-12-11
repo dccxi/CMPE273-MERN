@@ -3,15 +3,16 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
-import { Provider } from 'react-redux'
+import { ApolloProvider } from 'react-apollo'
+import ApolloClient from 'apollo-boost'
 
-import { store } from './reducers'
-
-window.store = store;
+const client = new ApolloClient({
+  uri: 'http://localhost:3001/graphql'
+})
 
 ReactDOM.render(
-  <Provider store={ store }>
+  <ApolloProvider client={ client }>
     <App />
-  </Provider>,
+  </ApolloProvider>,
   document.getElementById('root'));
 registerServiceWorker();

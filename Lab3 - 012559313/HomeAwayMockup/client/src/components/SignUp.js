@@ -1,13 +1,12 @@
 import React from 'react'
-import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import Welcome from './Welcome'
-import { register, logout } from '../actions/'
+import { register } from '../actions/'
 
 class SignUp extends React.Component {
   constructor(props) {
     super(props)
-    this.props.onLogOut()
+    localStorage.removeItem('token')
     this.state = {
       firstName: '',
       lastName: '',
@@ -27,7 +26,8 @@ class SignUp extends React.Component {
   onSubmit = e => {
     e.preventDefault()
     let user = this.state
-    this.props.onRegister(user)
+    register(user)
+    this.props.history.push('/')
   }
   build_input = attr => {
     return (
@@ -76,23 +76,4 @@ class SignUp extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => (
-  { registeredSuccess: state.auth.registeredSuccess }
-)
-
-
-const mapDispatchToProps = dispatch => ({
-  onRegister(user) {
-    dispatch(
-      register(user)
-    )
-  },
-  onLogOut() {
-    dispatch(
-      logout()
-    )
-  }
-})
-
-
-export default connect(mapStateToProps, mapDispatchToProps)(SignUp)
+export default SignUp

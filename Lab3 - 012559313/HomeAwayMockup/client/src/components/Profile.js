@@ -1,11 +1,12 @@
 import React from 'react'
-import { connect } from 'react-redux'
-import { getProfile, updateProfile } from '../actions/'
+import { getProfile } from '../services/queries'
+import { updateProfile } from '../services/mutations'
+import { graphql, compose } from 'react-apollo'
+import { Link } from 'react-router-dom'
 
 class Profile extends React.Component {
   constructor(props) {
     super(props)
-    this.props.onGetProfile()
     this.state = {
       image: '',
       firstName: '',
@@ -20,9 +21,7 @@ class Profile extends React.Component {
       language: '',
       gender: ''
     }
-  }
-  componentWillReceiveProps(newProps) {
-    this.setState(newProps.profile)
+    this.updated = false
   }
   handleChange = e => {
     this.setState({
@@ -34,9 +33,19 @@ class Profile extends React.Component {
   }
   onSubmit = e => {
     e.preventDefault()
-    this.props.onUpdateProfile(this.state)
+    console.log(this.state);
+    this.props.updateProfile({
+      variables: this.state
+    })
+    this.props.history.push('/')
   }
   render() {
+    const data = this.props.getProfile
+    if (data.loading === false && this.updated === false) {
+      this.updated = true
+      console.log(data.getProfile);
+      this.setState(data.getProfile)
+    }
     return (
       <div>
         <h2>Profile information</h2>
@@ -148,26 +157,13 @@ class Profile extends React.Component {
             type="submit"
           >Save changes</button>
         </div>
+        <Link to='/'><button>Home</button></Link>
       </div>
     )
   }
 }
 
-const mapStateToProps = (state) => (
-  { profile: state.profile }
-)
-
-const mapDispatchToProps = dispatch => ({
-  onGetProfile() {
-    dispatch(
-      getProfile()
-    )
-  },
-  onUpdateProfile(userProfile) {
-    dispatch(
-      updateProfile(userProfile)
-    )
-  }
-})
-
-export default connect(mapStateToProps, mapDispatchToProps)(Profile)
+export default compose(
+  graphql(getProfile, { name: 'getProfile' }),
+  graphql(updateProfile, { name: 'updateProfile' })
+)(Profile)

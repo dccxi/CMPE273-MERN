@@ -1,10 +1,9 @@
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
-import mysql from 'mysql'
 import config from './config'
 import _ from 'lodash'
 import moment from 'moment'
-import { Users, Properties, Trips } from './schema'
+import { Users, Properties, Trips } from './dbConnector'
 
 export function createUser(user) {
   return new Promise((res, rej) => {

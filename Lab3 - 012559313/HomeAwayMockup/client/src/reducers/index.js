@@ -9,7 +9,8 @@ const middleware = [thunk]
 const rootReducer = combineReducers({
   auth: authReducers,
   profile: profileReducers,
-  property: propertyReducers
+  property: propertyReducers,
+  // apollo: client.reducer()
 })
 
 export const store = createStore(
